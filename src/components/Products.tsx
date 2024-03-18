@@ -30,7 +30,7 @@ const Products = () => {
   useGSAP(() => {
     if (containerRef.current) {
       gsap.to(containerRef.current, {
-        xPercent: state ? -180 : 100,
+        xPercent: state ? -180 : -60,
         x: 100,
         ease: "none",
         scrollTrigger: {

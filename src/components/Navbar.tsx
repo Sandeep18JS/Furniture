@@ -54,7 +54,7 @@ const Navbar = (props: Props) => {
           </li>
         </ul>
       </nav>
-      <nav className="lg:hidden w-full flex bg-white text-[#2F302C] h-14 justify-center items-center gap-20">
+      <nav className="lg:hidden w-full flex bg-white text-[#2F302C] h-14 justify-center items-center gap-16">
         <Sofa size="26" color="#2F302C" />
         <div className="flex w-[264px] border-b-2 border-gray-200 gap-4">
           <Search color="#2F302C" size="18" className="mt-1" />

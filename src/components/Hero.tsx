@@ -46,7 +46,7 @@ const Hero = (props: Props) => {
           <div className="space-y-4">
             <div className="border border-[#2F302C] w-64 mt-4 mb-8"></div>
             <p className="text-[14px] lg:text-[20px] font-semibold text3"></p>
-            <p className="w-[380px] text-[10px] lg:text-[16px] text-[#6A6A6A] font-medium tracking-wider text4"></p>
+            <p className="w-[250px] lg:w-[380px] text-[10px] lg:text-[16px] text-[#6A6A6A] font-medium tracking-wider text4"></p>
           </div>
         </div>
       </div>

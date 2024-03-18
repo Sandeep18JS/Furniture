@@ -3,7 +3,7 @@ import { whys } from ".";
 
 const Chooseus = () => {
   return (
-    <div className="flex flex-col justify-center items-center mt-24 gap-10 text-[#2F302C]">
+    <div className="flex flex-col justify-center items-center  lg:mt-24 gap-10 text-[#2F302C]">
       <h1 className="text-[28px] font-extrabold">WHY CHOOSE US ?</h1>
       <div className=" flex flex-wrap justify-center gap-12">
         {whys.map((why, index) => (

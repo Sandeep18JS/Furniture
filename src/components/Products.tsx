@@ -9,8 +9,11 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(useGSAP);
 
 const Products = () => {
-  const [state, setState] = useState(true);
+  const [state, setState] = useState(
+    typeof window !== "undefined" && window.innerWidth < 1024
+  );
   const containerRef = useRef(null);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => {
@@ -23,22 +26,25 @@ const Products = () => {
       };
     }
   }, []);
+
   useGSAP(() => {
-    gsap.to(containerRef.current, {
-      xPercent: -60,
-      x: 100,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: () => innerWidth * 3,
-        scrub: true,
-        pin: true,
-        invalidateOnRefresh: true,
-        anticipatePin: 1,
-      },
-    });
-  });
+    if (containerRef.current) {
+      gsap.to(containerRef.current, {
+        xPercent: state ? -280 : -60,
+        x: 100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: state ? "top top" : "top top",
+          end: () => (state ? innerWidth * 10 : innerWidth * 3),
+          scrub: true,
+          pin: true,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        },
+      });
+    }
+  }, [containerRef.current]);
 
   return (
     <>
@@ -46,50 +52,26 @@ const Products = () => {
         FEATURED PRODUCTS
       </h1>
 
-      {!state ? (
-        <div
-          ref={containerRef}
-          className=" relative  ml-[450px]  flex flex-col justify-center items-center "
-        >
-          <div className=" flex gap-6 mt-32">
-            {Items.map((item, index) => (
-              <div key={index} className="w-[320px] h-[500px]  space-y-4  ">
-                <Image
-                  src={item.img}
-                  width={300}
-                  height={100}
-                  alt="img"
-                ></Image>
-                <div className="flex flex-col justify-center items-center gap-1">
-                  <h1 className="text-[15px] font-medium">{item.name}</h1>
-                  <p> &#9733; &#9733; &#9733; &#9733; &#9733; </p>
-                  <h1>{item.price}</h1>
-                </div>
+      <div
+        ref={containerRef}
+        className=" relative ml-[650px] lg:ml-[450px]  flex flex-col justify-center items-center "
+      >
+        <div className=" flex gap-6  mt-32">
+          {Items.map((item, index) => (
+            <div
+              key={index}
+              className="w-[250px] lg:w-[320px] h-[500px]  space-y-4  "
+            >
+              <Image src={item.img} width={300} height={100} alt="img"></Image>
+              <div className="flex flex-col justify-center items-center gap-1">
+                <h1 className="text-[15px] font-medium">{item.name}</h1>
+                <p> &#9733; &#9733; &#9733; &#9733; &#9733; </p>
+                <h1>{item.price}</h1>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      ) : (
-        <div className=" mt-12 ml-8">
-          <div className="flex flex-wrap gap-4">
-            {Items.map((item, index) => (
-              <div key={index} className=" space-y-4">
-                <Image
-                  src={item.img}
-                  width={200}
-                  height={100}
-                  alt="img"
-                ></Image>
-                <div className="flex flex-col text-center justify-center items-center gap-1">
-                  <h1 className="text-[13px] font-medium ">{item.name}</h1>
-                  <p> &#9733; &#9733; &#9733; &#9733; &#9733; </p>
-                  <h1>{item.price}</h1>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      </div>
     </>
   );
 };
